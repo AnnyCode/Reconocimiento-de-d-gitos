@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f7fb" />
+    <title>TecnoForms | Reconocimiento de dígitos</title>
+    <link rel="stylesheet" href="{{ url_for('estilo_css') }}" />
+    <script src="{{ url_for('script_js') }}" defer></script>
+  </head>
+  <body>
+    <main class="pagina">
+      <header class="encabezado">
+        <div>
+          <h1>Reconocimiento de dígitos</h1>
+          <p class="introduccion">
+            Dibuja un número y compara cómo lo interpretan los modelos.
+          </p>
+        </div>
+      </header>
+
+      <section class="panel" aria-labelledby="titulo-dibujo">
+        <div class="panel-principal">
+          <div class="titulo-seccion">
+            <div>
+              <p class="paso">PASO 1</p>
+              <h2 id="titulo-dibujo">Dibuja un dígito</h2>
+            </div>
+            <button class="boton boton-secundario" id="limpiar" type="button">
+              Limpiar
+            </button>
+          </div>
+
+          <div class="lienzo-contenedor">
+            <canvas
+              id="lienzo"
+              width="420"
+              height="420"
+              aria-label="Área para dibujar un dígito"
+            ></canvas>
+          </div>
+          <p class="ayuda">Usa el mouse o el dedo para dibujar del 0 al 9.</p>
+
+          <div class="seleccion-modelo">
+            <div class="titulo-seccion titulo-modelo">
+              <div>
+                <p class="paso">PASO 2</p>
+                <h2>Selecciona un modelo</h2>
+              </div>
+            </div>
+            <div
+              class="modelos"
+              role="group"
+              aria-label="Modelo de reconocimiento"
+            >
+              <button
+                class="modelo seleccionado"
+                type="button"
+                data-modelo="knn"
+                aria-pressed="true"
+              >
+                <span class="modelo-sigla">KNN</span>
+                <span class="modelo-detalle">Vecinos cercanos</span>
+              </button>
+              <button
+                class="modelo"
+                type="button"
+                data-modelo="svm"
+                aria-pressed="false"
+              >
+                <span class="modelo-sigla">SVM</span>
+                <span class="modelo-detalle">Máquinas de soporte</span>
+              </button>
+              <button
+                class="modelo"
+                type="button"
+                data-modelo="cnn"
+                aria-pressed="false"
+              >
+                <span class="modelo-sigla">CNN</span>
+                <span class="modelo-detalle">Red convolucional</span>
+              </button>
+            </div>
+          </div>
+
+          <button class="boton boton-predecir" id="predecir" type="button">
+            <span>Predecir dígito</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <aside class="panel-resultado" aria-live="polite" aria-atomic="true">
+          <p class="paso">RESULTADO</p>
+          <h2>Predicción</h2>
+          <div class="digito" id="digito">—</div>
+          <p class="estado" id="estado">Tu resultado aparecerá aquí.</p>
+          <div class="detalle-resultado">
+            <span>Modelo utilizado</span>
+            <strong id="modelo-resultado">KNN</strong>
+          </div>
+          <div
+            class="detalle-resultado confianza-resultado"
+            id="contenedor-confianza"
+            hidden
+          >
+            <span>Probabilidad del modelo</span>
+            <strong id="confianza-resultado"></strong>
+          </div>
+        </aside>
+      </section>
+
+      <footer>Modelos entrenados con dígitos manuscritos MNIST.</footer>
+    </main>
+  </body>
+</html>
